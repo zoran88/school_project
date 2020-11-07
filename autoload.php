@@ -8,7 +8,6 @@ function loadClass($className) {
     $fileName = '';
     $namespace = '';
 
-    // Sets the include path as the "src" directory
     $includePath = dirname(__FILE__);
 
     if (false !== ($lastNsPos = strripos($className, '\\'))) {
