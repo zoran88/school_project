@@ -11,6 +11,11 @@ class Database {
     const DB_USER = 'root';
     const DB_PASS = 'rootroot';
 
+    /**
+     * connection to database
+     *
+     * @return $connection
+     */
     private function connect()
     {
         $connection = new mysqli(self::HOST, self::DB_USER, self::DB_PASS, self::DB_NAME);
@@ -22,12 +27,17 @@ class Database {
         return $connection;
     }
 
+    /**
+     * returns student 
+     *
+     * @param [type] $id
+     * @return array
+     */
     public function doSelectStudent($id)
     {
         $connection = $this->connect();
         
-        //$query = 'SELECT s.sid, s.name, sb.data_type, g.grade from student as s JOIN school_board as sb ON s.sbid = sb.sbid JOIN grades as g ON s.sid = g.sid WHERE s.sid = ' .$id;
-        $query = 'SELECT s.sid, s.name, sb.data_type from student as s JOIN school_board as sb ON s.sbid = sb.sbid WHERE s.sid = ' .$id;
+        $query = 'SELECT s.sid, s.name, sb.data_type, sb.name as school_name from student as s JOIN school_board as sb ON s.sbid = sb.sbid WHERE s.sid = ' .$id;
         $result = mysqli_query($connection, $query);
 
         if ($result->num_rows > 0) {
@@ -38,6 +48,12 @@ class Database {
         return false;
     }
 
+    /**
+     * returns student grades 
+     *
+     * @param [type] $id
+     * @return array
+     */
     public function doSelectStudentGrades($id)
     {
         $connection = $this->connect();
@@ -53,9 +69,5 @@ class Database {
         }
 
         return $response;
-
     }
- 
-    
-
 }

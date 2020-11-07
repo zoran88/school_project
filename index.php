@@ -10,9 +10,8 @@ if(isset($_GET['student'])){
 
     $student = new Student($studentId);
 
-    echo $student->get() .' <br>';
+    $student->get();
+} else {
+    echo '<h1>SCHOOL BOARD TEST</h1>';
 }
-
-echo '<h1>SCHOOL BOARD TEST</h1>';
-
 ?>
